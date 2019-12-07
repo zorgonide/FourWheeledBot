@@ -6,7 +6,11 @@ global count
 count = 0
 
 #For use with PC
-ser = serial.Serial('/dev/ttyACM3', 19200)
+ser = serial.Serial('COM3', 19200) #Find port number from arduino IDE
+
+# for Unix uncomment
+ser = serial.Serial('/dev/ttyACM0', 19200)
+
 #Use polling to get user input
 class _Getch:
 	def __call__(self):

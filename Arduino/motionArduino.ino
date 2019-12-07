@@ -1,32 +1,26 @@
-#include "CytronMotorDriver.h"
+ #include "CytronMotorDriver.h"
 
 
 // Configure the motor driver.
-CytronMD motor1(PWM_PWM, 4, 5);  // PWM 1A = Pin 4, PWM 1B = Pin 5.
-CytronMD motor2(PWM_PWM, 7, 6);  // PWM 2A = Pin 6, PWM 2B = Pin 7.
-CytronMD motor3(PWM_PWM, 9, 8);  // PWM 3A = Pin 8, PWM 3B = Pin 9.
-CytronMD motor4(PWM_PWM, 11, 10);  // PWM 4A = Pin 10, PWM 4B = Pin 11.
-
-const int trigPin = 47;
-const int echoPin = 49;
-// defines variables
-long duration;
-int distance;
+CytronMD motor1(PWM_PWM, 5, 4);  // PWM 1A = Pin 2, PWM 1B = Pin   3.
+CytronMD motor2(PWM_PWM, 6, 7);  // PWM 2A = Pin 4, PWM 2B = Pin 5.
+CytronMD motor3(PWM_PWM, 8, 9);  // PWM 3A = Pin 6, PWM 3B = Pin 7.
+CytronMD motor4(PWM_PWM, 10, 11);  // PWM 4A = Pin 8, PWM 4B = Pin 9.
 
 int inp;
 
 // The setup routine runs once when you press reset.
 void setup() 
 {
- Serial.begin(19200);
- motor1.setSpeed(0); 
- motor2.setSpeed(0);
- motor3.setSpeed(0);
- motor4.setSpeed(0);
- pinMode(trigPin, OUTPUT); // Sets the trigPin as an Output
+  Serial.begin(19200);
+  motor1.setSpeed(0); 
+  motor2.setSpeed(0);
+  motor3.setSpeed(0);
+  motor4.setSpeed(0);
+  pinMode(trigPin, OUTPUT); // Sets the trigPin as an Output
   pinMode(echoPin, INPUT); // Sets the echoPin as an Input
-
 }
+
 boolean dist()
 {
   digitalWrite(trigPin, LOW);
@@ -46,58 +40,59 @@ boolean dist()
   else return true;
 }
 
+void trot()
+// Reduce change in momentum of bot
+{
+  motor1.setSpeed(100);
+  motor2.setSpeed(100);
+  motor3.setSpeed(100);
+  motor4.setSpeed(100);
+}
 
 void backward()
 {
-  Serial.println("Backward\n");
-  motor1.setSpeed(205);
-  motor2.setSpeed(205);
-  motor3.setSpeed(205);
-  motor4.setSpeed(205);
+  motor1.setSpeed(-150);
+  motor2.setSpeed(-150);
+  motor3.setSpeed(-150);
+  motor4.setSpeed(-150);
 }
 void right()
 {
-  Serial.println("Right \n");
-  motor1.setSpeed(255);
-  motor2.setSpeed(-255);
-  motor3.setSpeed(255);
-  motor4.setSpeed(-255);
+  motor1.setSpeed(-155);
+  motor2.setSpeed(155);
+  motor3.setSpeed(-155);
+  motor4.setSpeed(155);
 }
 void left()
 {
-  Serial.println("Left\n");
-  motor1.setSpeed(-255);
-  motor2.setSpeed(255);
-  motor3.setSpeed(-255);
-  motor4.setSpeed(255); 
+  motor1.setSpeed(155);
+  motor2.setSpeed(-155);
+  motor3.setSpeed(155);
+  motor4.setSpeed(-155); 
 }
 void forward()
 {
-  motor1.setSpeed(-255);
-  motor2.setSpeed(-255);
-  motor3.setSpeed(-255);
-  motor4.setSpeed(-255);
-  //delay(30);
-  
+  motor1.setSpeed(150);
+  motor2.setSpeed(150);
+  motor3.setSpeed(150);
+  motor4.setSpeed(150);
 }
 void forwardleft()
 {
-  motor1.setSpeed(-100);
-  motor2.setSpeed(-200);
-  motor3.setSpeed(-100);
-  motor4.setSpeed(-200);
+  motor1.setSpeed(100);
+  motor2.setSpeed(200);
+  motor3.setSpeed(125);
+  motor4.setSpeed(255);
 }
 void forwardright()
 {
-  Serial.print("Forward Right\n");
-  motor1.setSpeed(-200);
-  motor2.setSpeed(-100);
-  motor3.setSpeed(-200);
-  motor4.setSpeed(-100);
+  motor1.setSpeed(200);
+  motor2.setSpeed(100);
+  motor3.setSpeed(255);
+  motor4.setSpeed(125);
 }
 void backwardleft()
 {
-  Serial.println("Backward Left\n");
   motor4.setSpeed(-100);
   motor3.setSpeed(-200);
   motor2.setSpeed(-125);
@@ -105,22 +100,24 @@ void backwardleft()
 }
 void backwardright()
 {
-  Serial.print("Backward Right\n");
   motor4.setSpeed(-200);
   motor3.setSpeed(-100);
   motor2.setSpeed(-255);
   motor1.setSpeed(-125);
 }
-void Brake()
+void Brakes()
 {
-  Serial.print("Breaks\n");
   motor1.setSpeed(0);
   motor2.setSpeed(0);
   motor3.setSpeed(0);
   motor4.setSpeed(0);
 }
+
 void loop()
 {
+  // To use HC SR04 distance sensor
+  // if (Serial.available() > 0 && dist())
+  
   if(Serial.available() > 0)
   {
     inp = Serial.read();
@@ -130,47 +127,51 @@ void loop()
       case 'w' : 
                   forward();
                   delay(500);
-                  Brake();
+                  Brakes();
                   break;
       case 's' : 
                   backward();
                   delay(500);
-                  Brake();
+                  Brakes();
                   break;
       case 'd' : 
                   right();
                   delay(250);
-                  Brake();
+                  Brakes();
                   break;
       case 'a' : 
                   left();
                   delay(250);
-                  Brake();
+                  Brakes();
                   break;
-      case 'l' : 
+      case 'p' : //Yet to implement
                   forwardright();
                   delay(40);
-                  Brake();
+                  Brakes();
                   break;
-      case 'j' : 
+      case 'i' : //Yet to implement
                   forwardleft();
                   delay(40);
-                  Brake();
+                  Brakes();
                   break;
-      /*case 'l' : 
+      case 'l' : //Yet to implement
                   backwardright();
                   delay(40);
-                  Brake();
+                  Brakes();
                   break;
-      case 'k' : 
+      case 'k' : //Yet to implement
                   backwardleft();
                   delay(40);
-                  Brake();
+                  Brakes();
                   break;
-      */
+      case 't' : 
+                  trot();
+                  delay(500);
+                  Brakes();
+                  break;
       case 'b' :
       default : 
-                  Brake();
+                  Brakes();
     }
   }
 }
