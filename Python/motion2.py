@@ -5,13 +5,16 @@ from time import sleep # Import the sleep function from the time module
 import time
 i = 0
 while(1):
+        time.sleep(1)
         try:    
-                ser = Serial('COM'+str(i), 19200, timeout=.1) #PC
-                # ser = Serial('/dev/ttyACM'+str(i), 19200, timeout=.1) #UNIX
+                # ser = Serial('COM'+str(i), 19200, timeout=.1) #PC
+                ser = Serial('/dev/ttyACM'+str(i), 19200, timeout=.1) #UNIX
+                # ser = Serial('/dev/ttyACM0', 19200, timeout=.1) #UNIX
+                print('All Ok')
                 break
         except:
-                print('COM'+str(i)+ ' ERROR')
-                i+=1
+                print('PORT '+str(i)+ ' ERROR')
+                i = (i+1)%8
                 
 
 def getchar():
@@ -24,7 +27,8 @@ def getchar():
    finally:
       termios.tcsetattr(fd, termios.TCSADRAIN, old_settings)
    return ch
-# time.sleep(2)   
+time.sleep(2)   
+print("Enter options in WASD")
 while 1:
     ch = getchar()
     if ch.strip() == '':
@@ -49,14 +53,14 @@ while 1:
                 ser.write(b'd')
                 sleep(0.25)
         elif ch=='j':
-                print ("forwardleft")
-                ser.write(b'd')
+                print ("rotateLeft")
+                ser.write(b'i')
                 sleep(0.1)
         elif ch=='l':
-                print ("forwardright")
-                ser.write(b'd')
+                print ("roteteRight")
+                ser.write(b'p')
                 sleep(0.1)
         elif ch=='t':
-                print ("trot")
+                print ("Trot")
                 ser.write(b't')
                 sleep(0.1)
