@@ -8,6 +8,11 @@ CytronMD motor3(PWM_PWM, 8, 9);  // PWM 3A = Pin 6, PWM 3B = Pin 7.
 CytronMD motor4(PWM_PWM, 10, 11);  // PWM 4A = Pin 8, PWM 4B = Pin 9.
 
 int inp;
+const int trigPin = 47;
+const int echoPin = 49;
+// defines variables
+long duration;
+int distance;
 
 // The setup routine runs once when you press reset.
 void setup() 
@@ -72,25 +77,26 @@ void left()
 }
 void forward()
 {
-  motor1.setSpeed(150);
-  motor2.setSpeed(150);
-  motor3.setSpeed(150);
-  motor4.setSpeed(150);
+  motor1.setSpeed(180);
+  motor2.setSpeed(180);
+  motor3.setSpeed(180);
+  motor4.setSpeed(180);
 }
 void forwardleft()
 {
   motor1.setSpeed(100);
   motor2.setSpeed(200);
-  motor3.setSpeed(125);
-  motor4.setSpeed(255);
+  motor3.setSpeed(100);
+  motor4.setSpeed(200);
 }
 void forwardright()
 {
   motor1.setSpeed(200);
   motor2.setSpeed(100);
-  motor3.setSpeed(255);
-  motor4.setSpeed(125);
+  motor3.setSpeed(200);
+  motor4.setSpeed(100);
 }
+/*
 void backwardleft()
 {
   motor4.setSpeed(-100);
@@ -105,6 +111,7 @@ void backwardright()
   motor2.setSpeed(-255);
   motor1.setSpeed(-125);
 }
+*/
 void Brakes()
 {
   motor1.setSpeed(0);
@@ -135,32 +142,32 @@ void loop()
                   Brakes();
                   break;
       case 'd' : 
-                  right();
+                  forwardright();
                   delay(250);
                   Brakes();
                   break;
       case 'a' : 
+                  forwardleft();
+                  delay(250);
+                  Brakes();
+                  break;
+      case 'p' :  
+                  right();
+                  delay(250);
+                  Brakes();
+                  break;
+      case 'i' : 
                   left();
                   delay(250);
                   Brakes();
                   break;
-      case 'p' : //Yet to implement
-                  forwardright();
-                  delay(40);
-                  Brakes();
-                  break;
-      case 'i' : //Yet to implement
-                  forwardleft();
-                  delay(40);
-                  Brakes();
-                  break;
       case 'l' : //Yet to implement
-                  backwardright();
+                  //backwardright();
                   delay(40);
                   Brakes();
                   break;
       case 'k' : //Yet to implement
-                  backwardleft();
+                  //backwardleft();
                   delay(40);
                   Brakes();
                   break;
