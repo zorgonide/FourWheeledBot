@@ -63,38 +63,38 @@ void backward()
 }
 void right()
 {
-  motor1.setSpeed(-155);
-  motor2.setSpeed(155);
-  motor3.setSpeed(-155);
-  motor4.setSpeed(155);
+  motor1.setSpeed(210);
+  motor2.setSpeed(-210);
+  motor3.setSpeed(210);
+  motor4.setSpeed(-210);
 }
 void left()
 {
-  motor1.setSpeed(155);
-  motor2.setSpeed(-155);
-  motor3.setSpeed(155);
-  motor4.setSpeed(-155); 
+  motor1.setSpeed(-210);
+  motor2.setSpeed(210);
+  motor3.setSpeed(-210);
+  motor4.setSpeed(210); 
 }
 void forward()
 {
-  motor1.setSpeed(180);
-  motor2.setSpeed(180);
-  motor3.setSpeed(180);
-  motor4.setSpeed(180);
+  motor1.setSpeed(200);
+  motor2.setSpeed(200);
+  motor3.setSpeed(200);
+  motor4.setSpeed(200);
 }
 void forwardleft()
 {
-  motor1.setSpeed(100);
-  motor2.setSpeed(200);
-  motor3.setSpeed(100);
-  motor4.setSpeed(200);
+  motor1.setSpeed(255);
+  motor2.setSpeed(100);
+  motor3.setSpeed(255);
+  motor4.setSpeed(100);
 }
 void forwardright()
 {
-  motor1.setSpeed(200);
-  motor2.setSpeed(100);
-  motor3.setSpeed(200);
-  motor4.setSpeed(100);
+  motor1.setSpeed(100);
+  motor2.setSpeed(255);
+  motor3.setSpeed(100);
+  motor4.setSpeed(255);
 }
 /*
 void backwardleft()
