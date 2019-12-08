@@ -73,7 +73,7 @@ def get():
                 return
 		#get()
 
-#Delay of 0.15s on both arduino and RPi, chosen after hit and trial
+#Delay of 0.5s on both arduino and RPi, chosen after hit and trial
 sleep(2) # wait for the serial connection to initialize
 if __name__=='__main__':
     print("Enter option with arrow keys\n")
