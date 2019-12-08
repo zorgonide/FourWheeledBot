@@ -55,12 +55,12 @@ while 1:
         elif ch=='j':
                 print ("rotateLeft")
                 ser.write(b'i')
-                sleep(0.1)
+                sleep(0.25)
         elif ch=='l':
                 print ("roteteRight")
                 ser.write(b'p')
-                sleep(0.1)
+                sleep(0.25)
         elif ch=='t':
                 print ("Trot")
                 ser.write(b't')
-                sleep(0.1)
+                sleep(0.5)
