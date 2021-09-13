@@ -2,6 +2,11 @@
 
 4 wheeled test bot controlled using python and Arduino
 
+
+https://user-images.githubusercontent.com/48021258/133042829-de243633-d26d-4bf9-a414-fce09bef93cb.mp4
+
+
+
 ## Getting Started
 
 This is a keyboard controlled bot developed to use as a testing base for autonomous functions by Formula Manipal Driverless.
